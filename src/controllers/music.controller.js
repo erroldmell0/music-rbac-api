@@ -1,6 +1,6 @@
 const musicModel = require('../models/music.model');
 const albumModel = require('../models/album.model');
-const uploadFile = require('../services/storage.service');
+const { uploadFile } = require('../services/storage.service');
 const jwt = require('jsonwebtoken');
 
 
@@ -18,7 +18,6 @@ async function createMusic(req, res) {
             return res.status(403).json({ message: 'You do not have permission to perform this action' });
         }
     
-
         const { title } = req.body;
         const file = req.file;
 
@@ -27,7 +26,7 @@ async function createMusic(req, res) {
         const music = await musicModel.create({
             uri: result.url,
             title,
-            artist: decoded,
+            artist: decoded.id,
         });
 
         res.status(201).json({
@@ -36,8 +35,9 @@ async function createMusic(req, res) {
         });
 
     } catch (err) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
+    console.error('Create music error:', err);
+    return res.status(401).json({ message: 'Unauthorized', error: err.message });
+}
 
 }
 
@@ -54,11 +54,11 @@ async function createAlbum(req, res) {
             return res.status(403).json({ message: 'You do not have permission to perform this action' });
         }
 
-        const { title, musicIds } = req.body;
+        const { title, musics } = req.body;
 
         const album = await albumModel.create({
             title,
-            musics: musicIds,
+            musics: musics,
             artist: decoded.id,
         });
 
