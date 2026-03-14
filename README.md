@@ -1,6 +1,6 @@
-# Spotify Role-Based Auth API
+# Music Role-Based Auth API
 
-A backend service for Spotify-like music management with role-based access control (RBAC). This API handles user authentication, authorization, and music/album management with different permission levels.
+A backend service for music management with role-based access control (RBAC). This API handles user authentication, authorization, and music/album management with different permission levels.
 
 ## Features
 
@@ -49,7 +49,7 @@ A backend service for Spotify-like music management with role-based access contr
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/spotify-rbac-api.git
+   git clone https://github.com/erroldmell0/music-rbac-api.git
    cd spotify-rbac-api
    ```
 
@@ -62,9 +62,9 @@ A backend service for Spotify-like music management with role-based access contr
    Create a `.env` file in the root directory:
    ```
    PORT=3000
-   DATABASE_URL=mongodb://localhost:27017/spotify
+   DATABASE_URL=mongodb://localhost:27017/musiclibrary
    JWT_SECRET=your_secret_key_here
-   NODE_ENV=development
+   IMAGE_PRIVATE_KEY=your_private_key_here
    ```
 
 4. **Start the server**
@@ -82,16 +82,13 @@ A backend service for Spotify-like music management with role-based access contr
 - `POST /api/auth/logout` - Logout user
 
 ### Music
-- `GET /api/music` - Get all music tracks
-- `GET /api/music/:id` - Get a specific track
-- `POST /api/music` - Create a new track (requires auth)
-- `PUT /api/music/:id` - Update a track (requires auth)
-- `DELETE /api/music/:id` - Delete a track (requires auth)
+- `GET /api/music/` - Get all music tracks
+- `POST /api/upload` - Create a new track (requires auth)
 
 ### Albums
-- `GET /api/albums` - Get all albums
-- `GET /api/albums/:id` - Get album details
-- `POST /api/albums` - Create a new album (requires auth)
+- `GET /api/music/albums` - Get all albums
+- `GET api/music/albums/:albumId` - Get album by id
+- `POST /api/music/album` - Create a new album (requires auth)
 
 ## Usage
 
@@ -99,7 +96,7 @@ A backend service for Spotify-like music management with role-based access contr
 ```bash
 curl -X POST http://localhost:3000/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"username": "user1", "email": "user@example.com", "password": "password123"}'
+  -d '{"username": "user1", "email": "user@example.com", "password": "password123", "role":"user"}'
 ```
 
 ### Example: Login
@@ -131,5 +128,5 @@ npm test
 
 ## Author
 
-Errol D'Mello
+Errol D'mello
 
