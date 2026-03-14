@@ -50,7 +50,7 @@ A backend service for music management with role-based access control (RBAC). Th
 1. **Clone the repository**
    ```bash
    git clone https://github.com/erroldmell0/music-rbac-api.git
-   cd spotify-rbac-api
+   cd music-rbac-api
    ```
 
 2. **Install dependencies**
@@ -82,13 +82,13 @@ A backend service for music management with role-based access control (RBAC). Th
 - `POST /api/auth/logout` - Logout user
 
 ### Music
-- `GET /api/music/` - Get all music tracks
-- `POST /api/upload` - Create a new track (requires auth)
+- `GET /api/music/` - Get all music tracks (requires auth => user)
+- `POST /api/upload` - Create a new track (requires auth => artist)
 
 ### Albums
-- `GET /api/music/albums` - Get all albums
-- `GET api/music/albums/:albumId` - Get album by id
-- `POST /api/music/album` - Create a new album (requires auth)
+- `GET /api/music/albums` - Get all albums (requires auth => user)
+- `GET api/music/albums/:albumId` - Get album by id (requires auth => user)
+- `POST /api/music/album` - Create a new album (requires auth => artist)
 
 ## Usage
 
